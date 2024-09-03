@@ -7,19 +7,19 @@ import { Character } from '../Models/character.interface';
     providedIn: 'root',
   })
   export class CharacterService {
-    private apiUrl = 'http://localhost:8080/api/characters'; 
+    private apiUrl = 'http://localhost:8080/api/characters'; //api del backend del spring boot
   
     constructor(private http: HttpClient) {}
   
-    // Obtener todos los personajes
-    getAllCharacters(): Observable<Character[]> {  
+    // Método para obtener todos los personajes
+      getAllCharacters(): Observable<Character[]> {
       return this.http.get<Character[]>(this.apiUrl); 
     }
     
   
-    // Obtener un personaje por ID
+    // Método para obtener un personaje específico por su ID
     getCharacterId(id: number): Observable<Character> {
-      return this.http.get<Character>(`${this.apiUrl}/${id}`);
+    return this.http.get<Character>(`${this.apiUrl}/${id}`);
     }
-      
+
 }

@@ -1,20 +1,33 @@
-<div class="character-detail">
-  <img [src]="character.image" alt="{{ character.name }}" class="character-image">
-  <div class="character-details">
-    <h2>{{ character.name }}</h2>
-    <div class="character-status">
-      <span class="status-dot" [ngClass]="{
-        'alive': character.status === 'Alive',
-        'dead': character.status === 'Dead',
-        'unknown': character.status === 'unknown'
-      }"></span>
-      <span>{{ character.status }}</span>
+<div class="character-container" *ngIf="character">
+  <div class="character-card">
+    <div class="character-image-section">
+      <!-- Muestra la imagen del personaje -->
+      <img [src]="character.image" alt="{{ character.name }}" class="character-image">
     </div>
-    <p><strong>Species:</strong> {{ character.species }}</p>
-    <p><strong>Gender:</strong> {{ character.gender }}</p>
-    <p><strong>Origin:</strong> {{ character.origin.name }}</p>
-    <p><strong>Location:</strong> {{ character.location.name }}</p>
-    <p><strong>First seen in:</strong> {{ character.firstSeenIn }}</p>
+    <div class="character-info-section">
+      <!-- Muestra el nombre del personaje -->
+      <h2 class="character-name">{{ character.name }}</h2>
+      <div class="character-status-species">
+        <!-- Muestra el estado del personaje con un punto de color y la especie -->
+        <span class="status-dot" [ngClass]="{
+          'alive': character.status === 'Alive',
+          'dead': character.status === 'Dead',
+          'unknown': character.status === 'unknown'
+        }"></span>
+        <span>{{ character.status }} - {{ character.species }}</span>
+      </div>
+      <!-- Muestra la última ubicación conocida del personaje -->
+      <div class="character-detail-item">
+        <strong>Last known location:</strong>
+        <p>{{ character.location.name }}</p>
+      </div>
+      <!-- Muestra el episodio donde se vio por primera vez al personaje -->
+      <div class="character-detail-item">
+        <strong>First seen in:</strong>
+        <p>{{ character.firstSeenIn }}</p>
+      </div>
+      <!-- Botón para descargar la información en PDF -->
+      <button class="pdf-button" (click)="downloadPDF()">Download PDF</button>
+    </div>
   </div>
-  <button (click)="downloadPDF()">Download PDF</button>
 </div>

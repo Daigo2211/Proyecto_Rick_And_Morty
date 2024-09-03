@@ -11,7 +11,7 @@ import { jsPDF } from 'jspdf';
   styleUrl: './character.component.css'
 })
 export class CharacterComponent implements OnInit {
-  character: Character = {
+  character: Character = { /* Objeto para almacenar los datos del personaje */
     id: 0,
     name: '',
     status: '',
@@ -31,17 +31,20 @@ export class CharacterComponent implements OnInit {
     private route: ActivatedRoute,
     private characterService: CharacterService
   ) {
-    
+
   }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id')!;
+    const id = +this.route.snapshot.paramMap.get('id')!;  // Obtiene el ID del personaje de la URL
     this.characterService.getCharacterId(id).subscribe(data=>{
-      this.character = data;
-    });  
+      this.character = data;   // Asigna los datos del personaje al objeto `character`
+    });
    
   }
 
+
+
+  // Método para descargar la información del personaje en un archivo PDF
   downloadPDF(): void {
     const doc = new jsPDF();
     doc.text(`Character Details`, 10, 10);
